@@ -11,5 +11,8 @@
     // editor settings that will auto add the closing quote or curly brace
     "editor.autoClosingBrackets": "always",
     "editor.autoClosingQuotes": "always",
-    "editor.autoSurround": "languageDefined"
+    "editor.autoSurround": "languageDefined",
+    //Suggestion per Mike F Robbins blog
+    //https://mikefrobbins.com/2019/04/16/enable-tab-completion-in-vscode-for-a-powershell-ise-like-experience/
+    "editor.tabCompletion": "on"
 }
