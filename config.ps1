@@ -1,6 +1,6 @@
 Configuration build {
 
-    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration, PSDesiredStateConfiguration
+    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration PSDesiredStateConfiguration
 
     Node $AllNodes.NodeName {
 
@@ -50,7 +50,7 @@ Configuration build {
         }
 
         WindowsFeature 'nlb' {
-            Ensure = 'presnet'
+            Ensure = 'present'
             Name   = 'NLB'
         }
 
@@ -70,7 +70,7 @@ Configuration build {
             AllowSubDirConfig      = 'true'
         }
 
-        xWebsite FlawlessdotCom {
+        Website FlawlessdotCom {
             Name            =  $node.websiteName
             PhysicalPath    = 'c:\inetpub\flawlessdotcom'
             State           = 'started'
@@ -83,7 +83,7 @@ Configuration build {
                 }
             )
             ApplicationPool = 'DefaultAppPool'
-            Ensure          = Present
+            Ensure          = 'Present'
         }
     }
 }
