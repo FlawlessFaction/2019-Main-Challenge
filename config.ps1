@@ -35,7 +35,7 @@ Configuration build {
         }
 
         WindowsFeature 'windows-internal-database' {
-            Ensure = 'Present'
+            Ensure = 'present'
             Name   = 'Windows-Internal-Database'
         }
 
