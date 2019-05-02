@@ -1,6 +1,6 @@
 Configuration build {
 
-    Import-DscResource -Module PendingReboot, ComputerManagementDsc, xWebAdministration
+    Import-DscResource -Module PendingReboot, ComputerManagementDsc, WebAdministrationDsc
 
     Node $AllNodes.NodeName {
 
