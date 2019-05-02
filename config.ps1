@@ -1,6 +1,6 @@
 Configuration build {
 
-    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration PSDesiredStateConfiguration
+    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration, PSDesiredStateConfiguration
 
     Node $AllNodes.NodeName {
 
