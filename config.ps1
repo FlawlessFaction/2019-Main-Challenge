@@ -100,5 +100,5 @@ $ConfigData = @{
 }
 
 build -ConfigurationData $ConfigData
-Set-DscLocalConfigurationManager -path .\BuildTest01 -Credential $startCred -ComputerName localhost -Verbose
-Start-DscConfiguration -Wait -Path .\BuildTest01 -Credential $startCred -Verbose -Force -ComputerName localhost
+Set-DscLocalConfigurationManager -path .\build -Credential $startCred -ComputerName localhost -Verbose
+Start-DscConfiguration -Wait -Path .\build -Credential $startCred -Verbose -Force -ComputerName localhost
