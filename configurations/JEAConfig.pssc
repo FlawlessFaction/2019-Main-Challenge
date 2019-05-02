@@ -25,6 +25,6 @@
     # ScriptsToProcess = 'C:\ConfigData\InitScript1.ps1', 'C:\ConfigData\InitScript2.ps1'
 
     # User roles (security groups), and the role capabilities that should be applied to them when applied to a session
-    RoleDefinitions     = @{ 'Flawless\IISAdmin' = @{ RoleCapabilities = 'SqlAdministration' }; 'CONTOSO\SqlManaged' = @{ RoleCapabilityFiles = 'C:\RoleCapability\SqlManaged.psrc' }; 'CONTOSO\ServerMonitors' = @{ VisibleCmdlets = 'Stop-FFIIS', 'Start-FFIIS', 'Restart-FFIIS' } }
+    RoleDefinitions     = @{ 'Flawless\IISAdmin' = @{ RoleCapabilities = 'SqlAdministration' }; 'Flawless\SqlManaged' = @{ RoleCapabilityFiles = 'C:\RoleCapability\SqlManaged.psrc' }; 'Flawless\ServerMonitors' = @{ VisibleCmdlets = 'Stop-FFIIS', 'Start-FFIIS', 'Restart-FFIIS' } }
 
 }
