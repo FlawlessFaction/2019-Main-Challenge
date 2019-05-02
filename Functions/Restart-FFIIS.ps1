@@ -33,10 +33,7 @@ function Restart-FFIIS {
 
     process {
         try {
-            foreach ( $node in $Path ) {
-                Write-Verbose $node
-
-            }
+            Get-WebApplication | Restart-WebAppPool
         } catch {
             $PSCmdlet.ThrowTerminatingError( $PSItem )
         }

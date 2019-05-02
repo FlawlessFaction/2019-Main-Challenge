@@ -33,10 +33,7 @@ function Stop-FFIIS {
 
     process {
         try {
-            foreach ( $node in $Path ) {
-                Write-Verbose $node
-
-            }
+            Get-WebApplication | Stop-WebAppPool
         } catch {
             $PSCmdlet.ThrowTerminatingError( $PSItem )
         }
