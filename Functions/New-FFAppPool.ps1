@@ -1,17 +1,13 @@
-function Start-FFIIS {
+function New-FFAppPool {
     <#
         .Synopsis
-            Start IIS Related Functions
+        Creates a new FF Application Pool
         .Description
 
         .Example
-            Start-FFIIS -Path $Path
-
-        .Link
-        https://github.com/FlawlessFaction/2019-Main-Challenge
+        New-FFAppPool -Path $Path
 
         .Notes
-        Flawless Faction 2019
 
     #>
     [cmdletbinding()]
@@ -24,7 +20,7 @@ function Start-FFIIS {
         )]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $Path
+        $Name
     )
 
     begin {
@@ -33,7 +29,7 @@ function Start-FFIIS {
 
     process {
         try {
-            Get-WebApplication | Start-WebAppPool
+            New-WebAppPool -Name $Name
         } catch {
             $PSCmdlet.ThrowTerminatingError( $PSItem )
         }
