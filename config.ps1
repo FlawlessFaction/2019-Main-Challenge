@@ -1,6 +1,6 @@
 Configuration build {
 
-    Import-DscResource -Module PendingReboot, ComputerManagementDsc, xWebAdministration
+    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration, PSDesiredStateConfiguration
 
     Node $AllNodes.NodeName {
 
@@ -8,7 +8,25 @@ Configuration build {
             RebootNodeIfNeeded = $true
         }
 
-        PendingReboot checkReboot {
+        script SSL {
+            GetScript = {
+                Get-ChildItem cert:\LocalMachine\My | Where-Object {
+                    $_.Subject -match "flawless\.com"
+                }
+            }
+            SetScript = {
+                Import-Module PKI
+                New-SelfSignedCertificate -CertStoreLocation Cert:\LocalMachine\My -DnsName "flawless.com"
+            }
+            TestScript = {
+                $Cert = Get-ChildItem cert:\LocalMachine\My | Where-Object {
+                    $_.Subject -match "flawless\.com"
+                }
+                $Cert.Count -gt 0
+            }
+        }
+
+        xPendingReboot checkReboot {
             name = "flawless reboots plz"
         }
 
@@ -17,13 +35,18 @@ Configuration build {
         }
 
         WindowsFeature 'windows-internal-database' {
-            Ensure = 'Present'
+            Ensure = 'present'
             Name   = 'Windows-Internal-Database'
         }
 
         WindowsFeature 'microsoftwindowspowershellv2root' {
             Ensure = 'absent'
             Name   = 'MicrosoftWindowsPowerShellV2Root'
+        }
+
+        WindowsFeature 'PowerShell-V2' {
+            Ensure = 'absent'
+            Name   = 'PowerShell-V2'
         }
 
         WindowsFeature 'rsat-nlb' {
@@ -56,7 +79,14 @@ Configuration build {
             Name            =  $node.websiteName
             PhysicalPath    = 'c:\inetpub\flawlessdotcom'
             State           = 'started'
-            BindingInfo     = $certthumbprint
+            BindingInfo     = @(
+                MSFT_xWebBindingInformation {
+                    Protocol              = "HTTPS"
+                    Port                  = 443
+                    CertificateSubject    = $node.CertSubject
+                    CertificateStoreName  = "MY"
+                }
+            )
             ApplicationPool = 'DefaultAppPool'
             Ensure          = Present
         }
@@ -69,10 +99,11 @@ $ConfigData = @{
             NodeName    = 'localhost'
             MachineName = 'is01'
             websiteName = 'flawlessfaction'
+            CertSubject = 'CN=flawless.com'
         }
     )
 }
 
 build -ConfigurationData $ConfigData
-Set-DscLocalConfigurationManager -path .\BuildTest01 -Credential $startCred -ComputerName localhost -Verbose
-Start-DscConfiguration -Wait -Path .\BuildTest01 -Credential $startCred -Verbose -Force -ComputerName localhost
+Set-DscLocalConfigurationManager -path .\build -Credential $startCred -ComputerName localhost -Verbose
+Start-DscConfiguration -Wait -Path .\build -Credential $startCred -Verbose -Force -ComputerName localhost
