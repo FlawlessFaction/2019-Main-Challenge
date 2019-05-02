@@ -1,0 +1,2 @@
+Server Name:
+Server IP:
