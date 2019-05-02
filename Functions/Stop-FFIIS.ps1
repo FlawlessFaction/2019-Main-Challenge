@@ -7,7 +7,11 @@ function Stop-FFIIS {
         .Example
             Stop-FFIIS -Path $Path
 
+        .Link
+        https://github.com/FlawlessFaction/2019-Main-Challenge
+
         .Notes
+        Flawless Faction 2019
 
     #>
     [cmdletbinding()]
