@@ -44,6 +44,11 @@ Configuration build {
             Name   = 'MicrosoftWindowsPowerShellV2Root'
         }
 
+        WindowsFeature 'PowerShell-V2' {
+            Ensure = 'absent'
+            Name   = 'PowerShell-V2'
+        }
+
         WindowsFeature 'rsat-nlb' {
             Ensure = 'present'
             Name   = 'RSAT-NLB'
