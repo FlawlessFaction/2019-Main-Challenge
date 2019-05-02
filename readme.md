@@ -7,4 +7,10 @@ This repository contains the (perfect) PowerShell code to:
   - configure the application log
   - manage IIS status (start/stop)
 
+  ## Starting Point
+
+  Infrastructure\Deploy\deploy.ps1
+
+### Notes
+
 Reference: https://ironscripter.us/iron-scripter-2019-battle-challenge/
