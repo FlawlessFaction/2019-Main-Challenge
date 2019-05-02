@@ -4,6 +4,7 @@ Param(
 Describe 'SSL Enabled' {
 
     It 'is listening on port 443 with SSL' {
-        (Invoke-WebRequest "https://$computername").statuscode -eq 200 | Should be $true
-}
+        (Invoke-WebRequest "https://$computername").statuscode -eq 200 |
+            Should -BeTrue
+    }
 }
