@@ -7,7 +7,11 @@ function Stop-FFIIS {
         .Example
             Stop-FFIIS -Path $Path
 
+        .Link
+        https://github.com/FlawlessFaction/2019-Main-Challenge
+
         .Notes
+        Flawless Faction 2019
 
     #>
     [cmdletbinding()]
@@ -29,10 +33,7 @@ function Stop-FFIIS {
 
     process {
         try {
-            foreach ( $node in $Path ) {
-                Write-Verbose $node
-
-            }
+            Get-WebApplication | Stop-WebAppPool
         } catch {
             $PSCmdlet.ThrowTerminatingError( $PSItem )
         }

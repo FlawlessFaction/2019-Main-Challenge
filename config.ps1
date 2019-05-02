@@ -1,6 +1,6 @@
 Configuration build {
 
-    Import-DscResource -Module PendingReboot, ComputerManagementDsc, xWebAdministration, PSDesiredStateConfiguration
+    Import-DscResource -Module xPendingReboot, ComputerManagementDsc, xWebAdministration, PSDesiredStateConfiguration
 
     Node $AllNodes.NodeName {
 
@@ -26,7 +26,7 @@ Configuration build {
             }
         }
 
-        PendingReboot checkReboot {
+        xPendingReboot checkReboot {
             name = "flawless reboots plz"
         }
 
@@ -35,7 +35,7 @@ Configuration build {
         }
 
         WindowsFeature 'windows-internal-database' {
-            Ensure = 'Present'
+            Ensure = 'present'
             Name   = 'Windows-Internal-Database'
         }
 
